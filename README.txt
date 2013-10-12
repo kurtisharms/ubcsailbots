@@ -2,15 +2,15 @@
 UBC Sailbot
 ===========
 
-UBC Sailbot runs the UBC Sailbot control and ui system.  Running __main__ starts a loop which will continue to run until told otherwise by the GUI.
+UBC Sailbot runs the UBC Sailbot control and ui system.  Running main starts a loop which will continue to run until told otherwise by the GUI.
 
 Steps to get control code running:
 1) Navigate to top level directory
-2) Install setuptools.  Navigate to control/lib/setuptools* and run python 'setup.py install'
+2) Install setuptools.  Navigate to control/lib/setuptools* and run 'python setup.py install'
 3) Run 'python setup.py install_lib' (May need sudo before or run as admin)
 4) Run 'python setup.py test' (May need sudo before or run as admin)
 5) Navigate to control directory
-6) Start code, run 'python __main__.py'
+6) Start code, run 'python main.py'
 
 To start ui and control code:
 1) Navigate to ui directory
@@ -18,8 +18,8 @@ To start ui and control code:
 3) Move to browser and go to localhost:8080
 
 
-Architecture of __main__
-========================
+Architecture of main
+====================
 
   GlobalVars                 Main Thread
       |                           |          

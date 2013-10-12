@@ -26,6 +26,7 @@ import traceback
     #   - If false, mock will run off of an actual arduino through dev/tty ports     
 mock = False
 
+
 # Main - pass challenge or logic function name as argument
 def run(argv=None):
     #with open(path.join(path.dirname(__file__),'log/sailbot.log'), 'w'):
@@ -71,7 +72,8 @@ def run(argv=None):
             gVars.currentParams = None
                 
         time.sleep(.5)
-        
+
+
 def getTaskObject(process):
     if (process == sVars.GO_AROUND):
         return roundbuoy.RoundBuoy()
@@ -87,7 +89,8 @@ def getTaskObject(process):
         return chaserace.ChaseRace()
     else:
         gVars.logger.warning("No instruction task named " + str(process))
-    
+
+
 def setGlobVar(sc):
     if gVars.currentProcess == None:
         killAllFunctions()
@@ -97,7 +100,8 @@ def setGlobVar(sc):
         sc.enter(1, 1, setGlobVar, (sc,))
     else:
         sc.enter(1, 1, setGlobVar, (sc,))
-        
+
+
 def unkillAllFunctions():
     # All current kill flags must be added here.
     gVars.kill_flagPTP = 0
@@ -106,6 +110,7 @@ def unkillAllFunctions():
     gVars.kill_flagRB = 0
     gVars.kill_flagLD = 0
     gVars.kill_flagCR = 0
+
 
 def killAllFunctions():
     # All current kill flags must be added here.

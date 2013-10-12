@@ -32,8 +32,8 @@ class arduino:
         # Sets initial vectors and magnitudes for wind and boat
         self.flipflag = False
         self.windStrength = round(random.uniform(1, 5), 0)
-        self.actualWindAngle = round(random.uniform(-179, 180), 2)
-        self.actualWindSpeed = round(random.uniform(3, 6), 2)*self.windStrength
+        self.trueWindAngle = round(random.uniform(-179, 180), 2)
+        self.trueWindSpeed = round(random.uniform(3, 6), 2)*self.windStrength
         self.idealBoatSpd = round(random.uniform(.5, 1), 2)*self.windStrength
         self.previousx = None
         if (STRONG_CURRENT):
@@ -87,13 +87,13 @@ class arduino:
         else:
             self.arduinoData.hog = degree
     
-    def _updateActualWind(self):
-        # Updates actual wind angle
+    def _updateTrueWind(self):
+        # Updates true wind angle
         if (ALLOW_WIND_REVERSAL):
-            self.actualWindAngle += random.uniform(-.2, 0)
+            self.trueWindAngle += random.uniform(-.2, 0)
         else:
-            self.actualWindAngle += random.uniform(-.1, .1)     
-        self.actualWindAngle = standardcalc.boundTo180(self.actualWindAngle)  
+            self.trueWindAngle += random.uniform(-.1, .1)
+        self.trueWindAngle = standardcalc.boundTo180(self.trueWindAngle)
         
     def _updateHOG(self):
         # Updates slight variation in HOG      
@@ -131,13 +131,13 @@ class arduino:
             boat_speed = self.arduinoData.sog
             
             # Reverse direction for wind vector
-            wind_bearing = self.actualWindAngle
+            wind_bearing = self.trueWindAngle
             if (wind_bearing >= 0):
                 wind_bearing -= 180
             else:
                 wind_bearing += 180
                 
-            wind_speed = self.actualWindSpeed
+            wind_speed = self.trueWindSpeed
             
             boat_x = boat_speed * math.cos(boat_bearing)
             boat_y = boat_speed * math.sin(boat_bearing)
@@ -152,7 +152,7 @@ class arduino:
             
             awa = math.atan(y/x)
     
-            if(math.copysign(self.previousx, x) != self.previousx or self.flipflag): 
+            if (math.copysign(self.previousx, x) != self.previousx or self.flipflag):
                 if (not self.flipflag):
                     self.flipflag = True
                 elif (math.copysign(self.previousx, x) != self.previousx):
@@ -199,10 +199,9 @@ class arduino:
         self.arduinoData.gps_coord.long = lon
     
     def _updateAll(self):
-        self._updateActualWind()    
+        self._updateTrueWind()
         self._updateHOG()
         self._updateCOG()
         self._updateAWA()
         self._updateSOG()
-        self._updateGPS()     
-        
+        self._updateGPS()
