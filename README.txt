@@ -9,6 +9,8 @@ Steps to get control code running:
 2) Install setuptools.  Navigate to control/lib/setuptools* and run 'python setup.py install'
 3) Run 'python setup.py install_lib' (May need sudo before or run as admin)
 4) Run 'python setup.py test' (May need sudo before or run as admin)
+5) Navigate to top directory
+4) Run 'python setup.py install (May need sudo before or run as admin)
 5) Navigate to control directory
 6) Start code, run 'python main.py'
 
